@@ -3,6 +3,8 @@ let key = document.querySelector(".password");
 let result = document.querySelector(".result");
 let button = document.querySelector(".btn");
 let button1 = document.querySelector(".btn1");
+let copy = document.querySelector(".copy");
+let word = document.querySelector(".word");
 let alphabet = [
   "A",
   "B",
@@ -71,12 +73,9 @@ function decript() {
   while (new_key_array.length > message_array.length) {
     new_key_array.pop();
   }
-  console.log(message_array);
-
   let message_nr = message_array.map(function(letter) {
     return alphabet.indexOf(letter.toUpperCase());
   });
-  console.log(message_nr);
 
   let key_nr = new_key_array.map(function(letter) {
     return alphabet.indexOf(letter.toUpperCase());
@@ -95,14 +94,12 @@ function decript() {
 
     encoded_nr.push(adding);
   }
-  console.log(encoded_nr);
   let encoded_message = encoded_nr.map(function(num) {
     return alphabet[num];
   });
-  console.log(encoded_message);
   let encoded = encoded_message.join("");
-  console.log(encoded);
   result.textContent = encoded;
+  word.textContent = "decrypted";
 }
 
 function encript() {
@@ -115,33 +112,34 @@ function encript() {
   while (new_key_array.length > message_array.length) {
     new_key_array.pop();
   }
-  console.log("new key" + new_key_array);
   let message_nr = message_array.map(function(letter) {
     return alphabet.indexOf(letter.toUpperCase());
   });
-  console.log(message_nr);
   let key_nr = new_key_array.map(function(letter) {
     return alphabet.indexOf(letter.toUpperCase());
   });
-  console.log(key_nr);
   let encoded_nr = [];
   for (i = 0; i < key_nr.length; i++) {
     let adding = key_nr[i] + message_nr[i];
-
     if (adding > 51) {
       adding = adding - 51;
     }
     if (message_nr[i] == 51 && key_nr[i] != 0) {
       adding = adding - 1;
     }
-
     encoded_nr.push(adding);
   }
-  console.log(encoded_nr);
   let encoded_message = encoded_nr.map(function(num) {
     return alphabet[num];
   });
   let encoded = encoded_message.join("");
-  console.log(encoded);
+
   result.textContent = encoded;
 }
+copy.addEventListener("click", function() {
+  let textarea = document.querySelector(".result");
+  textarea.select();
+  document.execCommand("copy");
+  result.textContent = "COPPIED!";
+});
+
