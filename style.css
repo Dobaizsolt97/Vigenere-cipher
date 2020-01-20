@@ -51,5 +51,14 @@ button:hover {
 }
 
 @media screen and (max-width: 600px) {
-  body: scale(0.7);
+  body {
+    scale: (0.7);
+  }
+  .container {
+    width: 100vw;
+  }
 }
+.copy {
+  width: 100%;
+}
+
